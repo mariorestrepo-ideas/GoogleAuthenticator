@@ -43,7 +43,7 @@ namespace Google.Authenticator
         public TwoFactorAuthenticator(HashType hashType, int timeStep)
         {
             HashType = hashType;
-            DefaultClockDriftTolerance = TimeSpan.FromMinutes(5);
+            DefaultClockDriftTolerance = TimeSpan.FromMinutes(1);
             this.timeStep = timeStep;
         }
 

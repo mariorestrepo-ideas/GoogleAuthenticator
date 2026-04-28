@@ -22,8 +22,13 @@
         <asp:Image ID="imgQrCode" runat="server" /><br />
         <br />
         <strong>Manual Setup Code: </strong> <asp:Label runat="server" ID="lblManualSetupCode"></asp:Label>
+        <br />
+        secret: <asp:TextBox runat="server" ID="txtSecret"></asp:TextBox>
         <hr />
-        Validate Code: <asp:TextBox runat="server" ID="txtCode"></asp:TextBox> <asp:Button runat="server" ID="btnValidate" Text="Validate My Code!" OnClick="btnValidate_Click" /><br /><asp:Label runat="server" Font-Bold="true" ID="lblValidationResult"></asp:Label>
+        Validate Code: <asp:TextBox runat="server" ID="txtCode"></asp:TextBox>
+        <asp:Button runat="server" ID="btnValidate" Text="Validate My Code!" OnClick="btnValidate_Click" /><br />
+        <asp:Label runat="server" Font-Bold="true" ID="lblValidationResult"></asp:Label>
+
     </div>
     </form>
 </body>

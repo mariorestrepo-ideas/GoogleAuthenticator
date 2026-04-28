@@ -11,15 +11,15 @@ namespace Google.Authenticator.WebSample
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(Request.QueryString["key"]))
+            if (string.IsNullOrEmpty(txtSecret.Text))
             {
-                Response.Redirect("~/default.aspx?key=" + Guid.NewGuid().ToString().Replace("-", "").Substring(0, 10));
+                txtSecret.Text = Guid.NewGuid().ToString().Replace("-", "").Substring(0, 10);
             }
 
-            this.lblSecretKey.Text = Request.QueryString["key"];
+            this.lblSecretKey.Text = txtSecret.Text;
 
             TwoFactorAuthenticator tfa = new TwoFactorAuthenticator();
-            var setupInfo = tfa.GenerateSetupCode("我 & You", "user@example.com", Request.QueryString["key"], false, 10);
+            var setupInfo = tfa.GenerateSetupCode("我 & You", "user@example.com", txtSecret.Text, false, 10);
 
             string qrCodeImageUrl = setupInfo.QrCodeSetupImageUrl;
             string manualEntrySetupCode = setupInfo.ManualEntryKey;
@@ -31,7 +31,8 @@ namespace Google.Authenticator.WebSample
         protected void btnValidate_Click(object sender, EventArgs e)
         {
             TwoFactorAuthenticator tfa = new TwoFactorAuthenticator();
-            var result = tfa.ValidateTwoFactorPIN(Request.QueryString["key"], this.txtCode.Text);
+            TimeSpan tolerance = new TimeSpan(3000);
+            var result = tfa.ValidateTwoFactorPIN(txtSecret.Text, this.txtCode.Text, timeTolerance: tolerance);
 
             if (result)
             {
